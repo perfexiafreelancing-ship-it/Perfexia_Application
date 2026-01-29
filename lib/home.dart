@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen>
   late final AnimationController _titleController;
   late final AnimationController _statusController;
   late final AnimationController _cardsController;
-
+  bool _isJoinUsExpanded = false;
   late final Animation<Offset> _titleSlide;
   late final Animation<double> _statusFade;
   late final Animation<double> _cardsFade;
@@ -341,19 +341,11 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           const SizedBox(height: 20),
 
-          /// ---- SEND BUTTON ----
           SizedBox(
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: () {
-                // TODO: connect API / email later
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Proposal sent successfully 🚀"),
-                  ),
-                );
-              },
+              onPressed: _openJoinUsOverlay,
               style: ElevatedButton.styleFrom(
                 backgroundColor: PerfexiaColors.accent,
                 elevation: 0,
@@ -362,7 +354,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               child: Text(
-                "Send",
+                "Expand",
                 style: TextStyle(
                   fontSize: 16,
                   color: PerfexiaColors.primary,
@@ -376,7 +368,88 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  void _openJoinUsOverlay() {
+    final overlay = Overlay.of(context);
+    late OverlayEntry entry;
 
+    entry = OverlayEntry(
+      builder: (_) {
+        return Material(
+          color: PerfexiaColors.background,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Stack(
+                children: [
+                  _glassContainer(
+                    title: "Join Us",
+                    child: Column(
+                      children: [
+                        const _InputField(hint: "Your Name"),
+                        const SizedBox(height: 12),
+                        const _InputField(hint: "Email Address"),
+                        const SizedBox(height: 12),
+                        const _InputField(
+                          hint: "Proposal / Collaboration Idea",
+                          maxLines: 4,
+                        ),
+                        const SizedBox(height: 20),
+
+                        SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              entry.remove();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content:
+                                  Text("Proposal sent successfully 🚀"),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: PerfexiaColors.accent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                            ),
+                            child: Text(
+                              "Send",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: PerfexiaColors.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /// ❌ Close button
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => entry.remove(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    overlay.insert(entry);
+  }
 
   Widget _careerCard() {
     return _glassContainer(

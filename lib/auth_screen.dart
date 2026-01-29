@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'colors/PerfixiaColors.dart';
 import 'home.dart';
+import 'loggedinHome.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -45,6 +46,14 @@ class _AuthScreenState extends State<AuthScreen>
       context,
       MaterialPageRoute(builder: (_) => const HomeScreen()),
     );
+  }
+
+  void _goToDashBoard() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const DashboardScreen()),
+    );
+
   }
 
   @override
@@ -247,7 +256,7 @@ class _AuthScreenState extends State<AuthScreen>
     );
   }
 
-  Widget _button(String text) {
+  Widget _button(String text, {VoidCallback? onPressed}) {
     return SizedBox(
       width: double.infinity,
       height: 52,
@@ -255,10 +264,11 @@ class _AuthScreenState extends State<AuthScreen>
         style: ElevatedButton.styleFrom(
           backgroundColor: PerfexiaColors.accent,
           foregroundColor: Colors.black,
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
         ),
-        onPressed: () {},
+        onPressed: _goToDashBoard,
         child: Text(
           text,
           style: const TextStyle(fontWeight: FontWeight.w600),
@@ -266,6 +276,7 @@ class _AuthScreenState extends State<AuthScreen>
       ),
     );
   }
+
 
   Widget _skip() {
     return Align(

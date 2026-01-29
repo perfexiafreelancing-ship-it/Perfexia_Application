@@ -6,7 +6,6 @@ void main() {
   runApp(const PerfexiaApp());
 }
 
-/// ------------------ APP ------------------
 class PerfexiaApp extends StatelessWidget {
   const PerfexiaApp({super.key});
 
@@ -25,7 +24,6 @@ class PerfexiaApp extends StatelessWidget {
   }
 }
 
-/// ------------------ COLORS ------------------
 class PerfexiaColors {
   static const primary = Color(0xFF3B2A7A);
   static const secondary = Color(0xFF8B5CF6);
@@ -33,7 +31,6 @@ class PerfexiaColors {
   static const background = Color(0xFF120F2E);
 }
 
-/// ------------------ SPLASH SCREEN ------------------
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
