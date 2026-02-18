@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'colors/PerfixiaColors.dart';
 import 'home.dart';
 import 'loggedinHome.dart';
+import 'developerScreen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -17,6 +18,11 @@ class _AuthScreenState extends State<AuthScreen>
   bool isLogin = true;
   bool obscurePassword = true;
   bool consent = false;
+
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passwordCtrl = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
 
   late AnimationController _controller;
   late Animation<double> _flip;
@@ -33,6 +39,23 @@ class _AuthScreenState extends State<AuthScreen>
       curve: Curves.easeInOutExpo,
     );
   }
+
+  void _routeByEmail() {
+    final email = _emailCtrl.text.trim().toLowerCase();
+
+    if (email.contains("dev")) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const DeveloperScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const DashboardScreen()),
+      );
+    }
+  }
+
 
   void toggleAuth() async {
     if (_controller.isAnimating) return;
@@ -142,7 +165,7 @@ class _AuthScreenState extends State<AuthScreen>
         const SizedBox(height: 20),
         _quote(),
         const SizedBox(height: 26),
-        _input("Email", Icons.email_outlined),
+        _input("Email", Icons.email_outlined, controller: _emailCtrl),
         const SizedBox(height: 16),
         _password(),
         const SizedBox(height: 26),
@@ -170,11 +193,11 @@ class _AuthScreenState extends State<AuthScreen>
       children: [
         _brand("Create Account"),
         const SizedBox(height: 20),
-        _input("Full Name", Icons.person_outline),
+        _input("Full Name", Icons.person_outline, controller: _nameCtrl),
         const SizedBox(height: 14),
-        _input("Email", Icons.email_outlined),
+        _input("Email", Icons.email_outlined, controller: _emailCtrl),
         const SizedBox(height: 14),
-        _input("Mobile Number", Icons.phone_outlined),
+        _input("Mobile Number", Icons.phone_outlined, controller: _mobileCtrl),
         const SizedBox(height: 14),
         _password(),
         const SizedBox(height: 14),
@@ -215,8 +238,9 @@ class _AuthScreenState extends State<AuthScreen>
     );
   }
 
-  Widget _input(String hint, IconData icon) {
+  Widget _input(String hint, IconData icon, {TextEditingController? controller}) {
     return TextField(
+      controller: controller,
       style: const TextStyle(color: Colors.white),
       decoration: _decor(hint, icon),
     );
@@ -224,6 +248,7 @@ class _AuthScreenState extends State<AuthScreen>
 
   Widget _password() {
     return TextField(
+      controller: _passwordCtrl,
       obscureText: obscurePassword,
       style: const TextStyle(color: Colors.white),
       decoration: _decor(
@@ -234,12 +259,12 @@ class _AuthScreenState extends State<AuthScreen>
             obscurePassword ? Icons.visibility_off : Icons.visibility,
             color: Colors.white70,
           ),
-          onPressed: () =>
-              setState(() => obscurePassword = !obscurePassword),
+          onPressed: () => setState(() => obscurePassword = !obscurePassword),
         ),
       ),
     );
   }
+
 
   InputDecoration _decor(String hint, IconData icon, {Widget? suffix}) {
     return InputDecoration(
@@ -256,7 +281,7 @@ class _AuthScreenState extends State<AuthScreen>
     );
   }
 
-  Widget _button(String text, {VoidCallback? onPressed}) {
+  Widget _button(String text) {
     return SizedBox(
       width: double.infinity,
       height: 52,
@@ -268,7 +293,7 @@ class _AuthScreenState extends State<AuthScreen>
             borderRadius: BorderRadius.circular(14),
           ),
         ),
-        onPressed: _goToDashBoard,
+        onPressed: _routeByEmail, // ✅ TEMP routing
         child: Text(
           text,
           style: const TextStyle(fontWeight: FontWeight.w600),
@@ -276,6 +301,7 @@ class _AuthScreenState extends State<AuthScreen>
       ),
     );
   }
+
 
 
   Widget _skip() {
@@ -404,6 +430,10 @@ class _AuthScreenState extends State<AuthScreen>
   @override
   void dispose() {
     _controller.dispose();
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    _nameCtrl.dispose();
+    _mobileCtrl.dispose();
     super.dispose();
   }
 }
