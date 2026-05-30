@@ -159,7 +159,7 @@ const C = {
   border:     "rgba(0,212,184,0.15)",
 } as const;
 
-type ColorKey = keyof typeof C;
+// type ColorKey = keyof typeof C;
 
 // ─────────────────────────────────────────────────────────────
 // 3. INTERFACES / TYPES
