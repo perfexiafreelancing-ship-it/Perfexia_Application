@@ -1269,13 +1269,29 @@ const PerfexiaPortfolio: FC = () => {
             </ul>
 
             <MagneticBtn
-              className="pfx-nav-cta"
-              onClick={() => scrollTo("contact")}
-              ariaLabel="Start a project with Perfexia"
-              style={{ padding: "0.5rem 1.25rem", background: C.ink, color: "white", borderRadius: 100, fontSize: "0.875rem", fontWeight: 600, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}
+            className="pfx-nav-cta"
+            onClick={() =>
+              window.open(
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "_blank",
+              "noopener,noreferrer"
+              )
+            }
+            ariaLabel="Start a project with Perfexia"
+            style={{
+              padding: "0.5rem 1.25rem",
+              background: C.ink,
+              color: "white",
+              borderRadius: 100,
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "'DM Sans',sans-serif",
+            }}
             >
-              Start a Project →
-            </MagneticBtn>
+            Start a Project →
+          </MagneticBtn>
 
             {/* Hamburger */}
             <button
@@ -1356,7 +1372,13 @@ const PerfexiaPortfolio: FC = () => {
               </p>
 
               <div className="pfx-hero-actions" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "3rem" }}>
-                <MagneticBtn style={T.btnPrimary} onClick={() => scrollTo("contact")} ariaLabel="Start your project with Perfexia">
+                <MagneticBtn style={T.btnPrimary} onClick={() =>
+              window.open(
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "_blank",
+              "noopener,noreferrer"
+              )
+            } ariaLabel="Start your project with Perfexia">
                   Start Your Project →
                 </MagneticBtn>
                 <MagneticBtn style={T.btnOutline} onClick={() => scrollTo("work")} ariaLabel="View Perfexia project case studies">
@@ -1915,7 +1937,13 @@ const PerfexiaPortfolio: FC = () => {
 
                 <div className="pfx-cta-actions" style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "2rem" }}>
                   <MagneticBtn
-                    href="mailto:perfexiafreelancing@gmail.com"
+                    onClick={() =>
+                      window.open(
+                      "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+                      "_blank",
+                      "noopener,noreferrer"
+                      )
+                    }
                     style={T.btnTeal}
                     ariaLabel="Email Perfexia to start your project"
                   >
@@ -1993,7 +2021,13 @@ const PerfexiaPortfolio: FC = () => {
         {/* Floating CTA */}
         <div style={{ position: "fixed", bottom: "2rem", right: "2rem", zIndex: 200 }}>
           <MagneticBtn
-            onClick={() => scrollTo("contact")}
+            onClick={() =>
+              window.open(
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "_blank",
+              "noopener,noreferrer"
+              )
+            }
             ariaLabel="Book a free consultation with Perfexia"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "0.75rem 1.5rem", background: `linear-gradient(135deg,${C.violet},${C.teal})`, color: "white", borderRadius: 100, fontSize: "0.875rem", fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", boxShadow: "0 8px 28px rgba(108,71,255,0.4)", whiteSpace: "nowrap" }}
           >
