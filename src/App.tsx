@@ -159,6 +159,8 @@ const C = {
   border:     "rgba(0,212,184,0.15)",
 } as const;
 
+
+
 // type ColorKey = keyof typeof C;
 
 // ─────────────────────────────────────────────────────────────
@@ -223,6 +225,12 @@ interface ServiceItem {
   desc: string;
   bg: string;
   featured?: boolean;
+}
+
+interface ProductsItem {
+  name: string;
+  description: string;
+  link: string;
 }
 
 interface WorkflowItem {
@@ -316,6 +324,21 @@ const SERVICES: ServiceItem[] = [
   { icon: "🛟", title: "Maintenance & Support",       desc: "Ongoing technical support, performance optimization, and feature updates to keep your product sharp.", bg: "rgba(108,71,255,0.07)" },
 ];
 
+const Products: ProductsItem[] = [
+  {
+    name: "PowerZone Gym Fitness Application",
+    description:
+      "Complete fitness management platform with members, trainers, subscriptions ,Diet Plan , Weight Loss tracker and analytics.",
+    link: "https://power-zone-one.vercel.app/",
+  },
+  {
+    name: "LearnSprint",
+    description:
+      "AI-powered learning platform with progress tracking and smart analytics.",
+    link: "https://learnsprint-green.vercel.app/",
+  }
+];
+
 const WORKFLOW: WorkflowItem[] = [
   { icon: "🔍", title: "Analysis & Planning", desc: "Requirements, market research, and strategic roadmap creation." },
   { icon: "✏️", title: "UI/UX Design",        desc: "Wireframes, interactive prototypes, and high-fidelity designs." },
@@ -386,8 +409,8 @@ const PAYMENT_STEPS: PaymentStepItem[] = [
   { pct: "20%", title: "Final Delivery",        desc: "Final payment before deployment, source code handover, and project go-live.",                  color: C.teal },
 ];
 
-const NAV_ITEMS: string[] = ["about", "services", "work", "tech", "pricing"];
-const FOOTER_ITEMS: string[] = ["About", "Services", "Work", "Pricing", "Contact"];
+const NAV_ITEMS: string[] = ["about", "services", "products","work", "tech", "pricing"];
+const FOOTER_ITEMS: string[] = ["About", "Services", "Products","Work", "Pricing", "Contact"];
 const CTA_PERKS: string[] = ["Free Consultation", "Response in 24h", "NDA on Request", "100% Satisfaction"];
 const TRUST_BADGES: string[] = ["✓ 100% Client Satisfaction", "✓ Secure & NDA Protected", "✓ Delivering Excellence Across Platforms"];
 const PAYMENT_MODES: string[] = ["💳 UPI / GPay / PhonePe", "🏦 Bank Transfer / NEFT", "💳 Credit / Debit Cards"];
@@ -680,6 +703,7 @@ const HoverCard: FC<HoverCardProps> = ({
   style,
 }) => {
   const [hovered, setHovered] = useState<boolean>(false);
+  // const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
 
   const cardStyle: CSSProperties = useMemo(
     () => ({
@@ -1134,14 +1158,15 @@ const PerfexiaPortfolio: FC = () => {
   const [mobileOpen,     setMobileOpen]      = useState<boolean>(false);
   const [hoveredService, setHoveredService]  = useState<number | null>(null);
   const [cursorPos,      setCursorPos]       = useState<{ x: number; y: number }>({ x: -400, y: -400 });
-
+  // const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const isTouch = useIsTouchDevice();
   const width   = useWindowWidth();
   const isMobile = width < 768;
 
   // ── Scroll tracking ──
   useEffect(() => {
-    const sectionIds = ["home","about","services","work","tech","pricing","contact"];
+    const sectionIds = ["home","about","services","products","work","tech","pricing","contact"];
 
     const handleScroll = (): void => {
       setScrolled(window.scrollY > 40);
@@ -1272,7 +1297,7 @@ const PerfexiaPortfolio: FC = () => {
             className="pfx-nav-cta"
             onClick={() =>
               window.open(
-              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/viewform",
               "_blank",
               "noopener,noreferrer"
               )
@@ -1374,7 +1399,7 @@ const PerfexiaPortfolio: FC = () => {
               <div className="pfx-hero-actions" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "3rem" }}>
                 <MagneticBtn style={T.btnPrimary} onClick={() =>
               window.open(
-              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/viewform",
               "_blank",
               "noopener,noreferrer"
               )
@@ -1550,6 +1575,159 @@ const PerfexiaPortfolio: FC = () => {
               </ul>
             </div>
           </section>
+
+          <section id="products" aria-labelledby="products-heading" className="pfx-section">
+  <div className="pfx-container">
+    <Reveal>
+      <SectionTag>Our Products</SectionTag>
+
+      <h2 id="products-heading" style={T.sectionTitle}>
+        Solutions We <span style={{ color: C.violet }}>Built</span>
+      </h2>
+
+      <p style={T.sectionLead}>
+        Purpose-built software products designed to solve real-world business challenges.
+      </p>
+    </Reveal>
+
+    <ul
+      className="pfx-services-grid"
+      role="list"
+      style={{ listStyle: "none", margin: 0, padding: 0 }}
+    >
+      {Products.map((p, i) => (
+        <li key={p.name}>
+          <Reveal delay={i * 80}>
+            <article
+              onClick={() =>
+                window.open(
+                  p.link,
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+              onMouseEnter={() => setHoveredProduct(i)}
+              onMouseLeave={() => setHoveredProduct(null)}
+              style={{
+                background: "white",
+                border: `1px solid ${
+                  hoveredProduct === i
+                    ? "rgba(108,71,255,0.4)"
+                    : C.border
+                }`,
+                borderRadius: 20,
+                padding: "2rem",
+                position: "relative",
+                overflow: "hidden",
+                transform:
+                  hoveredProduct === i
+                    ? "translateY(-6px)"
+                    : "translateY(0px)",
+                boxShadow:
+                  hoveredProduct === i
+                    ? "0 24px 56px rgba(108,71,255,0.1)"
+                    : "none",
+                transition: "all 0.3s ease",
+                height: "100%",
+                cursor: "pointer",
+              }}
+            >
+              {/* Top Accent */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background: `linear-gradient(90deg,${C.violet},${C.teal})`,
+                  opacity: hoveredProduct === i ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                }}
+              />
+
+              {/* Number */}
+              <div
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "#94a3b8",
+                  marginBottom: "1rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </div>
+
+              <div
+  style={{
+    height: 220,
+    borderRadius: 12,
+    overflow: "hidden",
+    border: `1px solid ${C.border}`,
+    marginBottom: "1rem",
+  }}
+>
+  <iframe
+    src={p.link}
+    title={p.name}
+    style={{
+      // width: "100%",
+      // height: "100%",
+      border: "none",
+      transform: "scale(0.35)",
+      transformOrigin: "top left",
+      width: "285%",
+      height: "285%",
+      pointerEvents: "none",
+    }}
+  />
+</div>
+
+              {/* Product Name */}
+              <h3
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "1.0625rem",
+                  fontWeight: 700,
+                  color: C.ink,
+                  margin: "0 0 0.625rem 0",
+                }}
+              >
+                {p.name}
+              </h3>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: "0.875rem",
+                  color: "#64748b",
+                  lineHeight: 1.7,
+                  marginBottom: "1rem",
+                }}
+              >
+                {p.description}
+              </p>
+
+              {/* CTA */}
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  color: C.violet,
+                }}
+              >
+                View Product →
+              </div>
+            </article>
+          </Reveal>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
 
           {/* ══════════════════════════════
               COMPARISON TABLE
@@ -1939,7 +2117,7 @@ const PerfexiaPortfolio: FC = () => {
                   <MagneticBtn
                     onClick={() =>
                       window.open(
-                      "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+                      "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/viewform",
                       "_blank",
                       "noopener,noreferrer"
                       )
@@ -2023,7 +2201,7 @@ const PerfexiaPortfolio: FC = () => {
           <MagneticBtn
             onClick={() =>
               window.open(
-              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/edit",
+              "https://docs.google.com/forms/d/10gueBU4V12GzLut4yVsidj5biQxfLgAiRY9MC4kHgOk/viewform",
               "_blank",
               "noopener,noreferrer"
               )
