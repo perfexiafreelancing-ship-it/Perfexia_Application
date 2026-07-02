@@ -332,6 +332,22 @@ const Products: ProductsItem[] = [
     link: "https://power-zone-one.vercel.app/",
   },
   {
+    name: "Matrix Gym Fitness Application",
+    description :
+    "Fitness Management Application that covers Membership , Diets , Workouts , Weight , Height , Water Intake and Other exciting features",
+    link: "https://siranjeeviv26.github.io/Matrix_gym/"
+  },
+  {
+    name: "WanderLust - Travel around the World",
+    description: "Wanna travel around the world, But don't know where to start? , You've came to the right place, We cover almost all mesmerizing tourist spots on your entered location and Much more features are being updated, Stay Tuned",
+    link: "https://wanderlust-swart.vercel.app/"
+  },
+  {
+    name: "Marvel - No, Not that Marvel this is a Travel Webpage",
+    description: "Hello world is a Default machine term, You know why? Earlier when the Internet and computer was new to this world they been introduced with a coined term hello world which means their first interaction with all over the world, This is the Exact Idea behind this..",
+    link : "https://siranjeeviv26.github.io/travel/"
+  },
+  {
     name: "LearnSprint",
     description:
       "AI-powered learning platform with progress tracking and smart analytics.",
