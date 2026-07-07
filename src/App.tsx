@@ -30,6 +30,8 @@ import {
   RefObject,
 } from "react";
 
+import FitnessApp from "./fitness_app";
+
 // ─────────────────────────────────────────────────────────────
 // 1. GLOBAL CSS  (injected once – handles all media queries)
 // ─────────────────────────────────────────────────────────────
@@ -227,11 +229,12 @@ interface ServiceItem {
   featured?: boolean;
 }
 
-interface ProductsItem {
+type ProductsItem = {
   name: string;
   description: string;
-  link: string;
-}
+  link?: string;   
+  page?: JSX.Element; 
+};
 
 interface WorkflowItem {
   icon: string;
@@ -352,7 +355,12 @@ const Products: ProductsItem[] = [
     description:
       "AI-powered learning platform with progress tracking and smart analytics.",
     link: "https://learnsprint-green.vercel.app/",
-  }
+  },
+  {
+    name: "PowerZone Mobile App",
+    description: "...",
+    page: <FitnessApp />,
+  },
 ];
 
 const WORKFLOW: WorkflowItem[] = [
@@ -437,6 +445,7 @@ const ABOUT_CARDS: (AboutCardProps & { delay: number })[] = [
   { icon: "⚡", title: "Scalable Solutions",    desc: "Building robust architectures that grow with your business, ensuring long-term sustainability.",    delay: 200 },
   { icon: "✏️", title: "Refined Design",        desc: "Merging aesthetic excellence with intuitive functionality for superior user experiences.",           delay: 300 },
 ];
+
 
 // ─────────────────────────────────────────────────────────────
 // 5. CUSTOM HOOKS
@@ -1179,6 +1188,8 @@ const PerfexiaPortfolio: FC = () => {
   const isTouch = useIsTouchDevice();
   const width   = useWindowWidth();
   const isMobile = width < 768;
+  const [selectedPage, setSelectedPage] =
+  useState<JSX.Element | null>(null);
 
   // ── Scroll tracking ──
   useEffect(() => {
@@ -1228,6 +1239,25 @@ const PerfexiaPortfolio: FC = () => {
     WebkitTextFillColor:  "transparent",
     backgroundClip:       "text",
   };
+
+  if (selectedPage) {
+    return (
+      <>
+        <button
+          onClick={() => setSelectedPage(null)}
+          style={{
+            margin: 20,
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          ← Back
+        </button>
+  
+        {selectedPage}
+      </>
+    );
+  }
 
   return (
     <>
@@ -1592,6 +1622,8 @@ const PerfexiaPortfolio: FC = () => {
             </div>
           </section>
 
+          
+
           <section id="products" aria-labelledby="products-heading" className="pfx-section">
   <div className="pfx-container">
     <Reveal>
@@ -1615,13 +1647,13 @@ const PerfexiaPortfolio: FC = () => {
         <li key={p.name}>
           <Reveal delay={i * 80}>
             <article
-              onClick={() =>
-                window.open(
-                  p.link,
-                  "_blank",
-                  "noopener,noreferrer"
-                )
-              }
+              onClick={() => {
+                if (p.page) {
+                  setSelectedPage(p.page);
+                } else if (p.link) {
+                  window.open(p.link, "_blank");
+                }
+              }}
               onMouseEnter={() => setHoveredProduct(i)}
               onMouseLeave={() => setHoveredProduct(null)}
               style={{
