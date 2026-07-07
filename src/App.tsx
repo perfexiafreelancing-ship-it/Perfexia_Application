@@ -30,7 +30,7 @@ import {
   RefObject,
 } from "react";
 
-import FitnessApp from "./fitness_app";
+// import FitnessApp from "./fitness_app";
 
 // ─────────────────────────────────────────────────────────────
 // 1. GLOBAL CSS  (injected once – handles all media queries)
@@ -356,11 +356,11 @@ const Products: ProductsItem[] = [
       "AI-powered learning platform with progress tracking and smart analytics.",
     link: "https://learnsprint-green.vercel.app/",
   },
-  {
-    name: "PowerZone Mobile App",
-    description: "...",
-    page: <FitnessApp />,
-  },
+  // {
+  //   name: "PowerZone Mobile App",
+  //   description: "...",
+  //   page: <FitnessApp />,
+  // },
 ];
 
 const WORKFLOW: WorkflowItem[] = [
