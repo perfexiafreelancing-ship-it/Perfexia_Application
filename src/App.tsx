@@ -309,7 +309,7 @@ interface HeroStatItem {
 // ─────────────────────────────────────────────────────────────
 
 const HERO_STATS: HeroStatItem[] = [
-  { val: "12+", label: "Projects Delivered" },
+  { val: "13+", label: "Projects Delivered" },
   { val: "5+",  label: "Industries Served" },
   { val: "98%", label: "Client Satisfaction" },
   { val: "24h", label: "Response Time" },
@@ -356,11 +356,11 @@ const Products: ProductsItem[] = [
       "AI-powered learning platform with progress tracking and smart analytics.",
     link: "https://learnsprint-green.vercel.app/",
   },
-  // {
-  //   name: "PowerZone Mobile App",
-  //   description: "...",
-  //   page: <FitnessApp />,
-  // },
+  {
+    name: "Gifts and Glitz - A Personalized Gifts Store",
+    description: "Developed a WooCommerce e-commerce website for Gifts & Glitz using WordPress, featuring customized product displays and a user-friendly shopping experience.",
+    link: "https://www.giftsandglitz.in/",
+  },
 ];
 
 const WORKFLOW: WorkflowItem[] = [
@@ -2197,8 +2197,8 @@ const PerfexiaPortfolio: FC = () => {
 
               <Reveal delay={200}>
                 <address style={{ marginTop: "3.5rem", paddingTop: "3rem", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", gap: "2rem", justifyContent: "center", flexWrap: "wrap", fontStyle: "normal" }}>
-                  <a href="mailto:perfexiafreelancing@gmail.com" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>
-                    ✉ perfexiafreelancing@gmail.com
+                  <a href="mailto:sales@perfexia.in" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>
+                    ✉ sales@perfexia.in
                   </a>
                   <a href="https://linkedin.com/in/perfexia-freelancing" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>
                     in Perfexia Freelancing
